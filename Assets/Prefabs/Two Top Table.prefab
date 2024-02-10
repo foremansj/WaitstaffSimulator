@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 8950664297315211438}
   - component: {fileID: 3492679809662260377}
   - component: {fileID: 7837711779444763528}
+  - component: {fileID: -979474896074039095}
+  - component: {fileID: 2684169524611295921}
   m_Layer: 7
   m_Name: Two Top Table
   m_TagString: Table
@@ -107,6 +109,34 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!208 &-979474896074039095
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4318267536349988439}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
+--- !u!114 &2684169524611295921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4318267536349988439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab00da5fc629452418e702eeee33979a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5016547804434978238
 GameObject:
   m_ObjectHideFlags: 0
