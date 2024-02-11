@@ -20,5 +20,6 @@ public class PartySpawner : MonoBehaviour
             GameObject newCustomer = Instantiate(customerPrefab, spawnPoint, Quaternion.identity);
             newCustomer.transform.SetParent(newParty.transform);  
         }
+        
     }
 }

@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Table
   - Customer
+  - Host
+  - Waiting Area
+  - Exit Area
   layers:
   - Default
   - TransparentFX

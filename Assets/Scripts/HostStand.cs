@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class HostStand : MonoBehaviour
@@ -9,30 +10,35 @@ public class HostStand : MonoBehaviour
     [SerializeField] List<TableController> openTables;
     List<TableController> occupiedTables;
     [SerializeField] float waitlistDelay = 10f;
+    [SerializeField] GameObject waitingArea;
+    Collider hostCollider; 
     
     private void Awake() {
         waitlist = FindObjectOfType<Waitlist>();
     }
     private void Start() {
         occupiedTables = new List<TableController>();
+        hostCollider = GetComponentInChildren<BoxCollider>();
         StartCoroutine(SeatFromWaitList());
     }
     public void CheckWaitlist(PartyController party){
-        if(party.GetReservationStatus() == true) {
-            if(waitlist.GetReservationsList().Count == 0) {
-                FindOpenTable(party);
+        if(party.GetAssignedTable() == null) {
+            if(party.GetReservationStatus() == true) {
+                if(waitlist.GetReservationsList().Count == 0) {
+                    FindOpenTable(party);
+                }
+                else {
+                    waitlist.AddPartyToWaitlist(party);
+                }
             }
             else {
-                waitlist.AddPartyToWaitlist(party);
-            }
-        }
-        else {
-            if(waitlist.GetWalkinsList().Count == 0) {
-                FindOpenTable(party);
-            }
+                if(waitlist.GetWalkinsList().Count == 0) {
+                    FindOpenTable(party);
+                }
 
-            else {
-                waitlist.AddPartyToWaitlist(party);
+                else {
+                    waitlist.AddPartyToWaitlist(party);
+                }
             }
         }
     }
@@ -51,6 +57,7 @@ public class HostStand : MonoBehaviour
                 party.AssignTableToParty(openTables[n]);
                 occupiedTables.Add(openTables[n]);
                 openTables.Remove(openTables[n]);
+                SeatParty(party);
                 return;
             }
         }
@@ -94,5 +101,16 @@ public class HostStand : MonoBehaviour
 
     public bool GetOpenOrClosed() {
         return isOpenForBusiness;
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        if(other.transform.tag == "Customer" && other.transform.parent.GetComponent<PartyController>().GetAssignedTable() == null) {
+            other.GetComponent<Pathfinding>().SetTarget(GameObject.FindWithTag("Waiting Area").transform);
+            CheckWaitlist(other.transform.parent.GetComponent<PartyController>()); 
+        }
+    }
+
+    public GameObject GetWaitingArea() {
+        return waitingArea;
     }
 }
