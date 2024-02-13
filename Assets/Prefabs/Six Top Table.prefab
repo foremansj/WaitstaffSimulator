@@ -170,6 +170,7 @@ GameObject:
   - component: {fileID: 7384409192819791872}
   - component: {fileID: 7852414965367636379}
   - component: {fileID: 1059811849323603839}
+  - component: {fileID: -1005770769119339705}
   m_Layer: 7
   m_Name: Six Top Table
   m_TagString: Table
@@ -316,6 +317,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ab00da5fc629452418e702eeee33979a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-1005770769119339705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4980048804903890795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66f9c7e9464c1124e927eeb044c46400, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &6411727053447904462

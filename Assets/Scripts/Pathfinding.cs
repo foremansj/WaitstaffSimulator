@@ -1,6 +1,8 @@
 using System.Collections;
+using System.IO;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Animations;
 
 public class Pathfinding : MonoBehaviour
 {
@@ -20,7 +22,7 @@ public class Pathfinding : MonoBehaviour
 
     private void Update() {
         if(agent.enabled && target != null) {
-            //MoveToTarget(target);
+            MoveToTarget(target);
         }
     }
 
@@ -28,16 +30,9 @@ public class Pathfinding : MonoBehaviour
         return target;
     }
 
-    /*public void MoveToTarget(Transform transform) {
+    public void MoveToTarget(Transform transform) {
         destination = transform.position;
-        agent.SetDestination(destination);
-        Debug.Log("Re-pathing");
-        new WaitForSeconds(2);
-    }*/
-
-    //changing movement operation to coroutine so NPC pathing still works if collided with
-    public IEnumerator MoveToTarget() {
-        yield return null;
+        agent.destination = destination;
     }
 
     private void ClearTarget() {

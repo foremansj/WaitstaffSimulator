@@ -8,16 +8,33 @@ public class PartyController : MonoBehaviour
     string currentStepOfService;
     bool hasReservation = false;
     public TableController assignedTable = null;
-    //Waitlist waitlist;
+    public float partyMoodAggregate;
+    
+    [Header("Steps of Service")]
+    public bool isSeated;
+    public bool wasGreeted;
+    public bool hasOrdered;
+    public bool hasFinishedEating;
+    public bool hasPaid;
+
+    [Header("SOS Timers")]
+    public float timeEnteredRestaurant; 
+    public float timeSeatedAtTable;
+    public float timeGreeted;
+    public float timeOrderPlaced;
+    public float timeFoodDelivered;
+    public float timeFinishedEating;
+    public float timeCheckPaid;
+    public float timeLeftRestaurant;
     
     private void Awake() {
-        //waitlist = FindObjectOfType<Waitlist>();
+        
     }
 
     private void Start() {
-        //waitlist.AddPartyToWaitlist(this);
         SetPartyCustomers();
         CheckInWithHost();
+        timeEnteredRestaurant = FindObjectOfType<GameTimer>().GetRunningTime();
     }
     
     public void SetReservationStatus(bool reservationStatus) {
@@ -33,23 +50,33 @@ public class PartyController : MonoBehaviour
     }
 
     public string GetCurrentStepOfService() {
-        return currentStepOfService;
-    }
-
-    public void ChangeCurrentStepOfService(string newStepOfService) {
-        currentStepOfService = newStepOfService;
+        if(!isSeated) {
+            return "Finding Table";
+        }
+        else if(!wasGreeted) {
+            return "Greeting";
+        }
+        else if(!hasOrdered) {
+            return "Ordering";
+        }
+        else if(!hasFinishedEating) {
+            return "Eating";
+        }
+        else if(!hasPaid) {
+            return "Paying";
+        }
+        else {
+            return "Finished";
+        }
     }
 
     public void AssignTableToParty(TableController table) {
         assignedTable = table;
+        table.party = this;
     }
 
     public TableController GetAssignedTable() {
         return assignedTable;
-    }
-
-    public List<CustomerController> GetCustomers() {
-        return customers; 
     }
 
     private void SetPartyCustomers() {
@@ -63,10 +90,26 @@ public class PartyController : MonoBehaviour
         }
     }
 
+    public List<CustomerController> GetCustomers() {
+        return customers; 
+    }
+
     private void CheckInWithHost() {
         customers[0].GetComponent<Pathfinding>().SetTarget(GameObject.FindWithTag("Host").transform);
         for(int i = 1; i < customers.Count; i++) {
             customers[i].GetComponent<Pathfinding>().SetTarget(GameObject.FindWithTag("Waiting Area").transform);
         }
+    }
+
+    public void CalculatePartyMood() {
+        partyMoodAggregate = 0;
+        for(int i = 0; i < customers.Count; i++) {
+            partyMoodAggregate += customers[i].GetCustomerMood();
+        }
+        partyMoodAggregate = partyMoodAggregate / customers.Count;
+    }
+
+    public float GetPartyMood() {
+        return partyMoodAggregate;
     }
 }

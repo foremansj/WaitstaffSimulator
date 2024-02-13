@@ -51,7 +51,6 @@ public class HostStand : MonoBehaviour
 
     public void FindOpenTable(PartyController party) {
         int partySize = party.GetPartySize();
-        Debug.Log("Looking for a table");
         for(int n = 0; n < openTables.Count; n++) {
             if(partySize == openTables[n].GetTotalSeats() || partySize == openTables[n].GetTotalSeats() - 1) {
                 party.AssignTableToParty(openTables[n]);
@@ -67,7 +66,6 @@ public class HostStand : MonoBehaviour
         while(isOpenForBusiness) {
             List<PartyController> reservationsList = waitlist.GetReservationsList();
             List<PartyController> walkInsList = waitlist.GetWalkinsList();
-            Debug.Log("Checking Waitlist");
             if(reservationsList.Count > 0) {
                 for(int i = 0; i < reservationsList.Count; i++) { 
                     FindOpenTable(reservationsList[i]);
@@ -95,7 +93,7 @@ public class HostStand : MonoBehaviour
                 yield return new WaitForSeconds(waitlistDelay / 4f);
             }
             //if no party could be sat, begin delay until next seating
-            yield return null;
+            //yield return null;
         }
     }
 

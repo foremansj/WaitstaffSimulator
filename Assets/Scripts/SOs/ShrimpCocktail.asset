@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cf607e6463bca7647ad7d60132925aa6, type: 3}
-  m_Name: Burrata
+  m_Name: ShrimpCocktail
   m_EditorClassIdentifier: 
-  itemName: Burrata
-  description: Burrata cheese served with olives, crostini, and charcuterie
-  baseCost: 18
+  itemName: Shrimp Cocktail
+  description: Jumbo tiger shrimp served chilled with cocktail sauce
+  baseCost: 15
   taxRate: 0.2
-  ticketTimeSeconds: 20
+  ticketTimeSeconds: 10
   itemCategory: Appetizer

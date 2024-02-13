@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 1064197482135721066}
   - component: {fileID: -2810452986494960911}
   - component: {fileID: 4265730707199688955}
+  - component: {fileID: 2510446449829081272}
   m_Layer: 8
   m_Name: CustomerPrefab
   m_TagString: Customer
@@ -112,7 +113,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 32
   m_CollisionDetection: 0
@@ -151,6 +152,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f825588e520f7664fb7b80e68b710b01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  appetizerOrder: {fileID: 0}
+  moodCounter: 0
+  seatNumber: 0
+  isSeatedAtTable: 0
+  hasOrdered: 0
+  hasFinishedEating: 0
 --- !u!195 &1064197482135721066
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -161,8 +168,8 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 2
-  m_Acceleration: 8
+  m_Speed: 4
+  m_Acceleration: 6
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
@@ -202,3 +209,15 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
+--- !u!114 &2510446449829081272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1126857583219586488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f373b20005048884fbdd735d6b304424, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
