@@ -245,6 +245,7 @@ GameObject:
   - component: {fileID: 199565248}
   - component: {fileID: 199565249}
   - component: {fileID: 199565250}
+  - component: {fileID: 199565251}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -388,6 +389,24 @@ MonoBehaviour:
   uIController: {fileID: 1900486343}
   party: {fileID: 0}
   table: {fileID: 0}
+--- !u!114 &199565251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 199565243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c231e0a12ff96654eae03296c6880aab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 199565248}
+  playerCamera: {fileID: 946109127}
+  thirdPersonCamera: {fileID: 0}
+  uIController: {fileID: 1900486343}
+  party: {fileID: 0}
+  table: {fileID: 0}
 --- !u!1001 &246295421
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -396,6 +415,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 710586957}
     m_Modifications:
+    - target: {fileID: 1059811849323603839, guid: 840c0a74586777340992e693d4fd82a8, type: 3}
+      propertyPath: tableNumber
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 4980048804903890795, guid: 840c0a74586777340992e693d4fd82a8, type: 3}
       propertyPath: m_Name
       value: Six Top Table (1)
@@ -896,6 +919,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 710586957}
     m_Modifications:
+    - target: {fileID: -5049020375403763650, guid: 48e945a58fb4bf5469368430af2a31e0, type: 3}
+      propertyPath: tableNumber
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 458667544996270034, guid: 48e945a58fb4bf5469368430af2a31e0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -11.29
@@ -1548,6 +1575,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 710586957}
     m_Modifications:
+    - target: {fileID: -5049020375403763650, guid: 48e945a58fb4bf5469368430af2a31e0, type: 3}
+      propertyPath: tableNumber
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 458667544996270034, guid: 48e945a58fb4bf5469368430af2a31e0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.06
@@ -1811,6 +1842,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 710586957}
     m_Modifications:
+    - target: {fileID: 1059811849323603839, guid: 840c0a74586777340992e693d4fd82a8, type: 3}
+      propertyPath: tableNumber
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4980048804903890795, guid: 840c0a74586777340992e693d4fd82a8, type: 3}
       propertyPath: m_Name
       value: Six Top Table
@@ -2463,6 +2498,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 710586957}
     m_Modifications:
+    - target: {fileID: 2684169524611295921, guid: e673681722ce5d745bcc46681aafd56d, type: 3}
+      propertyPath: tableNumber
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4318267536349988439, guid: e673681722ce5d745bcc46681aafd56d, type: 3}
       propertyPath: m_Name
       value: Two Top Table
@@ -2523,9 +2562,9 @@ SceneRoots:
   - {fileID: 1059451242}
   - {fileID: 199565244}
   - {fileID: 767332105}
-  - {fileID: 1900486342}
-  - {fileID: 389290532}
   - {fileID: 710586957}
   - {fileID: 587340786}
   - {fileID: 1597951494}
   - {fileID: 844981286}
+  - {fileID: 1900486342}
+  - {fileID: 389290532}

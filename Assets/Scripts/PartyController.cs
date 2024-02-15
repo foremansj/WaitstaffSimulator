@@ -8,14 +8,16 @@ public class PartyController : MonoBehaviour
     string currentStepOfService;
     bool hasReservation = false;
     public TableController assignedTable = null;
-    public float partyMoodAggregate;
+    public float partyMood;
     
     [Header("Steps of Service")]
-    public bool isSeated;
-    public bool wasGreeted;
-    public bool hasOrdered;
-    public bool hasFinishedEating;
-    public bool hasPaid;
+    public bool isSeated = false;
+    public bool wasGreeted = false;
+    public bool isReadyToOrder = false;
+    public bool hasOrdered = false;
+    public bool isEating = false;
+    public bool hasFinishedEating = false;
+    public bool hasPaid = false;
 
     [Header("SOS Timers")]
     public float timeEnteredRestaurant; 
@@ -26,6 +28,8 @@ public class PartyController : MonoBehaviour
     public float timeFinishedEating;
     public float timeCheckPaid;
     public float timeLeftRestaurant;
+    [SerializeField] float randomDeliberationDelay;
+    [SerializeField] float randomPartyPatienceMultiplier;
     
     private void Awake() {
         
@@ -35,6 +39,9 @@ public class PartyController : MonoBehaviour
         SetPartyCustomers();
         CheckInWithHost();
         timeEnteredRestaurant = FindObjectOfType<GameTimer>().GetRunningTime();
+        randomDeliberationDelay = Random.Range(1f, 4f) * customers.Count;
+        randomPartyPatienceMultiplier = Random.Range(4f, 7f);
+        partyMood = 100f;
     }
     
     public void SetReservationStatus(bool reservationStatus) {
@@ -51,13 +58,16 @@ public class PartyController : MonoBehaviour
 
     public string GetCurrentStepOfService() {
         if(!isSeated) {
-            return "Finding Table";
+            return "Waiting for Table";
         }
         else if(!wasGreeted) {
             return "Greeting";
         }
         else if(!hasOrdered) {
             return "Ordering";
+        }
+        else if(!isEating) {
+            return "Waiting for Order";
         }
         else if(!hasFinishedEating) {
             return "Eating";
@@ -101,15 +111,19 @@ public class PartyController : MonoBehaviour
         }
     }
 
-    public void CalculatePartyMood() {
-        partyMoodAggregate = 0;
-        for(int i = 0; i < customers.Count; i++) {
-            partyMoodAggregate += customers[i].GetCustomerMood();
-        }
-        partyMoodAggregate = partyMoodAggregate / customers.Count;
+    public float GetDeliberationDelay() {
+        return randomDeliberationDelay;
+    }
+
+    public float GetPartyPatienceMultiplier() {
+        return randomPartyPatienceMultiplier;
     }
 
     public float GetPartyMood() {
-        return partyMoodAggregate;
+        return partyMood;
+    }
+
+    public void AdjustPartyMood(float number) {
+        partyMood += number;
     }
 }

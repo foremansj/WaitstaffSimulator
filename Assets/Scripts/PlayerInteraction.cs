@@ -12,6 +12,7 @@ public class PlayerInteraction : MonoBehaviour
     FirstPersonCamera firstPersonCamera;
     Transform interactionTarget;
     GreetingInteraction greetingInteraction;
+    OrderingInteraction orderingInteraction;
     
     private void Awake() {
         firstPersonCamera = FindObjectOfType<FirstPersonCamera>();
@@ -19,6 +20,7 @@ public class PlayerInteraction : MonoBehaviour
     private void Start() {
         playerInput = GetComponent<PlayerInput>();
         greetingInteraction = GetComponent<GreetingInteraction>();
+        orderingInteraction = GetComponent<OrderingInteraction>();
     }
 
     private void Update() {
@@ -44,14 +46,18 @@ public class PlayerInteraction : MonoBehaviour
                 if(stepOfService == "Greeting") {
                         firstPersonCamera.ChangeReticleColor(Color.green);
                         if(isInteractPressed) {
-                            greetingInteraction.ClearOldGreeting();
-                            greetingInteraction.SetUpGreeting(customerParty.GetAssignedTable(), customerParty);
-                            greetingInteraction.RunGreetingDialogue();
+                            greetingInteraction.ClearOldGreetingInteraction();
+                            greetingInteraction.SetUpGreetingInteraction(customerParty.GetAssignedTable(), customerParty);
+                            StartCoroutine(greetingInteraction.RunGreetingInteraction());
                         }
                 }
-                else if(stepOfService == "Ordering") {
+                else if(stepOfService == "Ordering" && customerParty.isReadyToOrder) {
                         firstPersonCamera.ChangeReticleColor(Color.green);
-                        //if interacted with, take customer/party's order
+                        if(isInteractPressed) {
+                            orderingInteraction.ClearOldOrderingInteraction();
+                            orderingInteraction.SetUpOrderingInteraction(customerParty.GetAssignedTable(), customerParty);
+                            orderingInteraction.RunOrderingInteraction();
+                        }
                 }
                 else {
                         firstPersonCamera.ChangeReticleColor(Color.red);

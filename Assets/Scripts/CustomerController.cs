@@ -9,8 +9,6 @@ public class CustomerController : MonoBehaviour
     MenuController menuController;
     public MenuItemSO appetizerOrder;
     
-    public float moodCounter;
-    
     public int seatNumber;
     public bool isSeatedAtTable;
     public bool hasOrdered;
@@ -21,7 +19,6 @@ public class CustomerController : MonoBehaviour
     }
     private void Start() {
         pathfinding = GetComponent<Pathfinding>();
-        moodCounter = 100f;
         partyController = GetComponentInParent<PartyController>();
     }
 
@@ -38,7 +35,7 @@ public class CustomerController : MonoBehaviour
         return seatNumber;
     }
 
-    public void DecideOrder() {
+    public void DecideAppetizer() {
         appetizerOrder = menuController.GetRandomAppetizer();
     }
 
@@ -63,9 +60,5 @@ public class CustomerController : MonoBehaviour
                 partyController.timeSeatedAtTable = FindObjectOfType<GameTimer>().GetRunningTime();
             }
         }
-    }
-
-    public float GetCustomerMood() {
-        return moodCounter;
     }
 }

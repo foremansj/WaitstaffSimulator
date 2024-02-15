@@ -35,6 +35,10 @@ public class TableController : MonoBehaviour
         return party;
     }
 
+    public int GetTableNumber() {
+        return tableNumber;
+    }
+
     private void OnTriggerEnter(Collider other) {
         if(other.tag == "Customer" && other.transform.parent.GetComponent<PartyController>().GetAssignedTable() == this && 
                     other.GetComponent<Pathfinding>().target != null) {
