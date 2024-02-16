@@ -2,7 +2,7 @@
     "name": "Wait Staff Simulator",
     "maps": [
         {
-            "name": "Player",
+            "name": "Default",
             "id": "f84fc0e6-9524-4070-8b27-6fdea3d7e184",
             "actions": [
                 {

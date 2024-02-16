@@ -7,17 +7,23 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] Rigidbody playerRigidbody;
     [SerializeField] float walkSpeed;
+    CameraController cameraController;
     PlayerInput playerInput;
     Vector2 moveInput;
     
     private void Start() 
     {
         playerInput = GetComponent<PlayerInput>();
+        cameraController = GetComponent<CameraController>();
+        playerInput.SwitchCurrentActionMap("Default");
     }
     private void Update() 
     {
-        HandleMovement();
-        HandleRotation();
+        if(playerInput.currentActionMap.name == "Default"){
+            HandleMovement();
+            HandleRotation();
+        }
+        
     }
     void OnMove(InputValue value)
     {
@@ -43,9 +49,8 @@ public class PlayerMovement : MonoBehaviour
 
     void HandleRotation()
     {
-        // added Time.deltaTime to try and smooth camera rotation, not sure this is in right place
-        // or is right at all
+        // removed Time.deltaTime, was origninally to try and smooth camera rotation, not sure this is in right place, or is right at all
         Quaternion cameraRotation = Camera.main.transform.rotation; 
-        gameObject.transform.rotation = new Quaternion(0, cameraRotation.y * Time.deltaTime, 0, cameraRotation.w * Time.deltaTime);
+        gameObject.transform.rotation = new Quaternion(0, cameraRotation.y, 0, cameraRotation.w);
     }
 }

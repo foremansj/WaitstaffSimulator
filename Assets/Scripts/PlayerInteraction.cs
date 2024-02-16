@@ -9,13 +9,13 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField] float raycastDistance = 2.5f;
     public PlayerInput playerInput;
     bool isInteractPressed;
-    FirstPersonCamera firstPersonCamera;
+    CameraController firstPersonCamera;
     Transform interactionTarget;
     GreetingInteraction greetingInteraction;
     OrderingInteraction orderingInteraction;
     
     private void Awake() {
-        firstPersonCamera = FindObjectOfType<FirstPersonCamera>();
+        firstPersonCamera = FindObjectOfType<CameraController>();
     }
     private void Start() {
         playerInput = GetComponent<PlayerInput>();
@@ -56,7 +56,7 @@ public class PlayerInteraction : MonoBehaviour
                         if(isInteractPressed) {
                             orderingInteraction.ClearOldOrderingInteraction();
                             orderingInteraction.SetUpOrderingInteraction(customerParty.GetAssignedTable(), customerParty);
-                            orderingInteraction.RunOrderingInteraction();
+                            StartCoroutine(orderingInteraction.RunOrderingInteraction());
                         }
                 }
                 else {

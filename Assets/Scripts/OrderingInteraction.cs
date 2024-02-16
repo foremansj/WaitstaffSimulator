@@ -5,7 +5,7 @@ using UnityEngine;
 public class OrderingInteraction : MonoBehaviour
 {
     [SerializeField] PlayerInteraction player; 
-    [SerializeField] FirstPersonCamera playerCamera;
+    [SerializeField] CameraController playerCameraController;
     [SerializeField] Camera thirdPersonCamera;
     [SerializeField] UIController uIController;
     public PartyController party;
@@ -26,15 +26,22 @@ public class OrderingInteraction : MonoBehaviour
         table = null;
     }
 
-    public void RunOrderingInteraction() { 
+    public IEnumerator RunOrderingInteraction() { 
         Debug.Log("Taking table " + table.GetTableNumber() + "'s order");
-        //move camera to third person camera
-        //player controls need to switch from Movement to Interaction/Notetaking
-        //for each customer in the party, lock camera while they are ordering
-            //give order via typewriter dialogue
-            //after they are finished speaking, enable button to move to next customer or previous customer
-        party.hasOrdered = true;
         party.timeOrderPlaced = FindObjectOfType<GameTimer>().GetRunningTime();
-        //adjust party's mode based on when they were ready to order and when their order was taken
+        if(party.timeOrderPlaced - party.timeGreeted > party.GetPartyPatienceMultiplier() * 5f) {
+            party.AdjustPartyMood(-1 * ((party.timeGreeted - party.timeSeatedAtTable) - party.GetPartyPatienceMultiplier() * 10f));
+        }
+        playerCameraController.SwitchCameraView();
+        playerCameraController.SetCameraFocusTarget(table.transform);
+        yield return new WaitForSeconds(2f);
+        for(int i = 0; i < table.GetAssignedParty().GetCustomers().Count; i++) {
+            playerCameraController.SetCameraFocusTarget(table.GetAssignedParty().GetCustomers()[i].transform);
+            yield return new WaitForSeconds(3f);
+        }
+        //just need to implement UI elements, buttons and whatnot so player can move to next customer manually
+        //will need to re-write this method when that is ready
+        playerCameraController.SwitchCameraView();
+        party.hasOrdered = true;
     }
 }

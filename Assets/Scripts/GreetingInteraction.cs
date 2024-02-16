@@ -5,7 +5,7 @@ using UnityEngine;
 public class GreetingInteraction : MonoBehaviour
 {
     [SerializeField] PlayerInteraction player; 
-    [SerializeField] FirstPersonCamera playerCamera;
+    [SerializeField] CameraController playerCameraController;
     [SerializeField] Camera thirdPersonCamera;
     [SerializeField] UIController uIController;
     public PartyController party;
@@ -31,19 +31,18 @@ public class GreetingInteraction : MonoBehaviour
 
     public IEnumerator RunGreetingInteraction() {
         Debug.Log("Welcome to the restaurant!");
-        //the camera needs to switch to the over-the-shoulder 3rd person camera
-            //lock in place above player, look at center of table to view entire NPC party
-        //player controls need to switch from Movement to Interaction/Notetaking
+        playerCameraController.SwitchCameraView();
+        playerCameraController.SetCameraFocusTarget(table.transform);
         //typewriter dialogue box appears on bottom of player's screen 
             //typewriter script writing should be it's own script as it will be used for orders as well
         //after the dialogue is finished, player controls and camera return to normal
-            
         party.timeGreeted = FindObjectOfType<GameTimer>().GetRunningTime();
-        //adjust party's mood based on difference in time greeted vs time seated
+        yield return new WaitForSeconds(5f); //random timer for testing camera transitions until UI elements are introduced
         if(party.timeGreeted - party.timeSeatedAtTable > party.GetPartyPatienceMultiplier() * 5f) {
             party.AdjustPartyMood(-1 * ((party.timeGreeted - party.timeSeatedAtTable) - party.GetPartyPatienceMultiplier() * 10f));
         }
         party.wasGreeted = true;
+        playerCameraController.SwitchCameraView();
         yield return new WaitForSecondsRealtime(party.GetDeliberationDelay());
         party.isReadyToOrder = true;
         //put a timer above the table to indicate when they're ready to order
