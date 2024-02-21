@@ -43,8 +43,8 @@ public class GreetingInteraction : MonoBehaviour
         }
         party.wasGreeted = true;
         playerCameraController.SwitchCameraView();
-        yield return new WaitForSecondsRealtime(party.GetDeliberationDelay());
-        party.isReadyToOrder = true;
-        //put a timer above the table to indicate when they're ready to order
+        StartCoroutine(party.ReadyToOrder());
+        yield return null;
+        //put a timer above the table to indicate when they're ready to order // move this to Party Script or UI script
     }
 }

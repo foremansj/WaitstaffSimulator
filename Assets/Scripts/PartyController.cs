@@ -126,4 +126,9 @@ public class PartyController : MonoBehaviour
     public void AdjustPartyMood(float number) {
         partyMood += number;
     }
+
+    public IEnumerator ReadyToOrder() {
+        yield return new WaitForSeconds(randomDeliberationDelay);
+        isReadyToOrder = true;
+    }
 }

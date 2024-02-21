@@ -29,8 +29,12 @@ public class OrderingInteraction : MonoBehaviour
     public IEnumerator RunOrderingInteraction() { 
         Debug.Log("Taking table " + table.GetTableNumber() + "'s order");
         party.timeOrderPlaced = FindObjectOfType<GameTimer>().GetRunningTime();
-        if(party.timeOrderPlaced - party.timeGreeted > party.GetPartyPatienceMultiplier() * 5f) {
-            party.AdjustPartyMood(-1 * ((party.timeGreeted - party.timeSeatedAtTable) - party.GetPartyPatienceMultiplier() * 10f));
+        //if the player takes longer than the party's patience setting, they will lose mood
+        //the time the order was taken minus the time it was greeted minus the delay represents when they were ready to order
+        //the patience multiplier represents an appropriate time for the party to wait before ordering after being ready to order
+        //will need to be fine-tuned for actual gameplay
+        if((party.timeOrderPlaced - party.timeGreeted - party.GetDeliberationDelay()) > (party.GetPartyPatienceMultiplier() * 5f)) {
+            party.AdjustPartyMood((party.GetPartyPatienceMultiplier() * 5f) - (party.timeOrderPlaced - party.timeGreeted - party.GetDeliberationDelay()));
         }
         playerCameraController.SwitchCameraView();
         playerCameraController.SetCameraFocusTarget(table.transform);
